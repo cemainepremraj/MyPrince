@@ -1,91 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Will you be my Valentine, Prince? 💘</title>
 
 <style>
   body {
-    margin:0;
+    margin: 0;
     font-family: Arial, sans-serif;
-    background:#ffe6ee;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-   ;
-    border-radius:20px;
-    width:90%;
-    max-width:550px;
-    text-align:center;
-    box-shadow:0 10px 40px rgba(0,0,0,0.15);
-    position:relative;
+    background: #ffe6ee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
 
-  h1 { font-size:28px; color:#333; }
-  .subtitle { color:#666; margin-bottom:10px; }
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+
+  h1 {
+    font-size: 28px;
+    color: #333;
+  }
+
+  .subtitle {
+    color: #666;
+    margin-bottom: 10px;
+  }
 
   .note {
-    background:#fff0f5;
-    border:1px dashed #ff8bb3;
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:20px;
-    font-size:14px;
+    background: #fff0f5;
+    border: 1px dashed #ff8bb3;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
   }
 
   .buttons {
-    margin-top:25px;
-    position:relative;
-    height:120px;
+    margin-top: 25px;
+    position: relative;
+    height: 120px;
   }
 
   button {
-    padding:12px 22px;
-    border-radius:30px;
-    border:none;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    padding: 12px 22px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   #yesBtn {
-    background:#2ecc71;
-    color:white;
+    background: #2ecc71;
+    color: white;
   }
 
   #noBtn {
-    background:#e4e4e4;
-    color:#222;
-    position:absolute;
-    left:50%;
-    top:40px;
-    transform:translateX(-50%);
-    transition:0.1s;
+    background: #e4e4e4;
+    color: #222;
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
+    transition: 0.1s;
   }
 
   #playMusic {
-    position:absolute;
-    top:10px;
-    right:10px;
-    background:#ff4d6d;
-    color:white;
-    padding:6px 12px;
-    border-radius:30px;
-    border:none;
-    cursor:pointer;
-    font-size:14px;
-    display:none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4d6d;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
   }
 
   #success {
-    display:none;
-    margin-top:20px;
-    font-size:20px;
-    color:#ff4d6d;
+    display: none;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ff4d6d;
   }
-
 </style>
 </head>
 
@@ -95,7 +106,10 @@
 
   <button id="playMusic">▶ Music</button>
 
-  <p class="subtitle">Hi <strong>Rohil</strong> — you make my status go from “Do Not Disturb” to “Disturb me with cuddles.” ✨</p>
+  <p class="subtitle">
+    Hi <strong>Rohil</strong> — you make my status go from “Do Not Disturb” to
+    “Disturb me with cuddles.” ✨
+  </p>
 
   <h1>Will you be my Valentine, Prince? 💖</h1>
 
@@ -107,37 +121,43 @@
   </div>
 
   <div id="success">Yay! You said YES! 🎉💘</div>
-
 </div>
 
 <!-- Hidden YouTube audio -->
-<iframe id="musicFrame" width="1" height="1" style="position:absolute; left:-9999px;"
-allow="autoplay"></iframe>
+<iframe
+  id="musicFrame"
+  width="1"
+  height="1"
+  style="position:absolute; left:-9999px;"
+  allow="autoplay"
+></iframe>
 
 <script>
-/* Cheesy rotating notes */
+/* rotating cheesy lines */
 const lines = [
   "You’re my favourite plot twist, Prince. 💫",
   "You + me = ☕ + 🍫 + endless giggles.",
   "Breaking news: Heart stolen by Rohil. 💘",
-  "If kisses were Wi‑Fi, yours would be full bars. 📶💋"
+  "If kisses were Wi‑Fi, yours would be full bars. 📶💋",
 ];
-function swapCheese(){
+function swapCheese() {
   document.getElementById("cheese").textContent =
-    lines[Math.floor(Math.random()*lines.length)];
+    lines[Math.floor(Math.random() * lines.length)];
 }
 swapCheese();
 setInterval(swapCheese, 3000);
 
 /* No button dodge */
 const noBtn = document.getElementById("noBtn");
-document.addEventListener("mousemove", e => {
+document.addEventListener("mousemove", (e) => {
   const box = noBtn.getBoundingClientRect();
-  const dist = Math.hypot(e.clientX - (box.left + box.width/2),
-                          e.clientY - (box.top + box.height/2));
-  if(dist < 90){
-    noBtn.style.left = (Math.random()*70 + 10) + "%";
-    noBtn.style.top = (Math.random()*70 + 10) + "px";
+  const dist = Math.hypot(
+    e.clientX - (box.left + box.width / 2),
+    e.clientY - (box.top + box.height / 2)
+  );
+  if (dist < 90) {
+    noBtn.style.left = Math.random() * 70 + 10 + "%";
+    noBtn.style.top = Math.random() * 70 + 10 + "px";
   }
 });
 
@@ -146,32 +166,35 @@ let armed = false;
 const musicFrame = document.getElementById("musicFrame");
 const playMusic = document.getElementById("playMusic");
 
-function loadMusic(unmute=false){
-  const videoID = "LzXLcKbbDTw"; 
+function loadMusic(unmute = false) {
+  const id = "LzXLcKbbDTw"; 
   const params =
-    `autoplay=1&mute=${unmute?0:1}&controls=0&loop=1&playlist=${videoID}`;
+    `autoplay=1&mute=${unmute ? 0 : 1}&controls=0&loop=1&playlist=${id}`;
+  musicFrame.src = `https://www.youtube.com/embed/${id}?${params}`;
 
-  musicFrame.src = `https://www.youtube.com/embed/${videoID}?${params}`;
-
-  if(!armed){
+  if (!armed) {
     armed = true;
-    setTimeout(()=> playMusic.style.display="inline-block", 1500);
+    setTimeout(() => (playMusic.style.display = "inline-block"), 1500);
   }
 }
 
-document.addEventListener("pointerdown", () => loadMusic(false), {once:true});
+document.addEventListener(
+  "pointerdown",
+  () => loadMusic(false),
+  { once: true }
+);
+
 playMusic.onclick = () => {
   loadMusic(true);
   playMusic.textContent = "♪ Playing";
-  setTimeout(()=> playMusic.style.display="none", 1200);
+  setTimeout(() => (playMusic.style.display = "none"), 1200);
 };
 
 /* YES button */
 document.getElementById("yesBtn").onclick = () => {
-  document.getElementById("success").style.display="block";
+  document.getElementById("success").style.display = "block";
   loadMusic(true);
 };
-
 </script>
 </body>
 </html>
